@@ -58,41 +58,45 @@ def filterEmpty(plays, columnname):
 
 def dropColumns(plays):
     plays = plays.drop('MOTION', 1)
-    #plays = plays.drop('DIST', 1)
-    plays = plays.drop('DN', 1)
+    plays = plays.drop('DIST', 1)
+    #plays = plays.drop('DN', 1)
     plays = plays.drop('GAP', 1)
     plays = plays.drop('HASH', 1)
     plays = plays.drop('PLAY DIR', 1)
     plays = plays.drop('QTR', 1)
     plays = plays.drop('RESULT', 1)
     plays = plays.drop('YARD LN', 1)
-    #plays = plays.drop('PLAY #', 1)
+    plays = plays.drop('PLAY #', 1)
     return plays
 
 
 def clusterPlays(plays, k):
+        data = scale(plays)
         kmeans = KMeans(init='k-means++', n_clusters=k, n_init=10)
-        cluster_labels = kmeans.fit_predict(plays)
-        return cluster_labels
+        kmeans.fit(data)
+        clusteredPlays = pd.DataFrame(plays, columns=['DN','GN/LS'])
+        clusteredPlays.insert(0, 'Cluster', kmeans.labels_)
+        return plays
 
 
 def clusterGoodness(plays, k):
+        data = scale(plays)
         rows = []
-        count = 0
+        colList = plays.columns.values.tolist()
+        cols = str(', '.join(colList))
         for i in k:
             start = time.time()
-            cluster_labels = clusterPlays(plays, i)
-            silhouette_avg = silhouette_score(plays, cluster_labels, sample_size=50000)
+            kmeans = KMeans(init='k-means++', n_clusters=i, n_init=10)
+            cluster_labels = kmeans.fit_predict(data)
+            silhouette_avg = silhouette_score(data, cluster_labels, sample_size=50000)
             end = time.time()
             runtime = (end - start)
-            count += 1
-            row = pd.DataFrame({'K' : i, 'Silhouette_Avg' : silhouette_avg, 'Time' : runtime, 'Size' : len(plays)}, index=count)
+            row = {'Features' : cols, 'K' : i, 'Silhouette_Avg' : silhouette_avg, 'Time' : runtime, 'Size' : len(plays)};
             rows.append(row)
-        output = pd.concat(rows)
+        output = pd.DataFrame(rows)
         filename = 'cluster_goodness_' + time.strftime("%Y-%m-%d_%H-%M-%S") +'.csv'
         output.to_csv(filename)
         
-
 
 def main():
     plays = pd.DataFrame()
@@ -104,17 +108,19 @@ def main():
     plays = filterEmpty(plays, 'DN')
     plays = filterEmpty(plays, 'PLAY #')
     #plays = filterEmpty(plays, 'QTR')
-    #plays = filterEmpty(plays, 'YARD LN')
+    plays = filterEmpty(plays, 'YARD LN')
     #has_quarter = filterEmpty(has_quarter, 'YARD LN')
     #has_quarter_runs, has_quarter_passes = filterPlayType(has_quarter)
     plays = dropColumns(plays)
     
     runs, passes = filterPlayType(plays)
     print len(runs)
+    temp = list(runs.columns.values)
+    print temp
     print runs.dtypes
-    
-    data = scale(runs)
-    clusterGoodness(data, [4,5,6,7])
+
+    temp = clusterPlays(runs, 5)
+    #clusterGoodness(data, [5])
     
 
 if __name__ == '__main__':
