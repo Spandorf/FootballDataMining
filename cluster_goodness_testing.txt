@@ -1,0 +1,80 @@
+512625
+[u'DIST', u'DN', u'GN/LS']
+DIST     float64
+DN       float64
+GN/LS      int64
+dtype: object
+('For n_clusters =', 5, 'The silhouette_score is :', 0.4590753610195944)
+1469.22900009
+('For n_clusters =', 4, 'The silhouette_score is :', 0.45938991194779538
+1695.57800007
+('For n_clusters =', 7, 'The silhouette_score is :', 0.45938991194779538)
+1695.57800007
+('For n_clusters =', 9, 'The silhouette_score is :', 0.42085766508033784)
+1567.34599996
+513480
+
+512181
+[u'DIST', u'DN', u'GN/LS', u'PLAY #']
+DIST      float64
+DN        float64
+GN/LS       int64
+PLAY #    float64
+('For n_clusters =', 5, 'The silhouette_score is :', 0.36923778691016879)
+1618.58000016
+
+513145
+[u'DN', u'GN/LS']
+DN       float64
+GN/LS      int64
+dtype: object
+('For n_clusters =', 3, 'The silhouette_score is :', 0.53324012908885399)
+1540.63199997
+('For n_clusters =', 4, 'The silhouette_score is :', 0.553922596132706)
+1647.05500007
+('For n_clusters =', 5, 'The silhouette_score is :', 0.57592312592852868)
+1555.37599993
+('For n_clusters =', 7, 'The silhouette_score is :', 0.56354637004415808)
+1374.45500016
+('For n_clusters =', 8, 'The silhouette_score is :', 0.53276793870355843)
+1609.50499988
+
+247589
+[u'DIST', u'GN/LS']
+DIST     float64
+GN/LS      int64
+dtype: object
+('For n_clusters =', 4, 'The silhouette_score is :', 0.52034516789913632)
+1587.34800005
+('For n_clusters =', 7, 'The silhouette_score is :', 0.43753711618814772)
+1366.39099979
+('For n_clusters =', 10, 'The silhouette_score is :', 0.41613522751982046)
+1652.39600015
+
+512181
+[u'DIST', u'GN/LS']
+DIST     float64
+GN/LS      int64
+dtype: object
+('For n_clusters =', 4, 'The silhouette_score is :', 0.5285047949742655)
+1570.43600011
+('For n_clusters =', 5, 'The silhouette_score is :', 0.51476235087972544)
+1471.80599999
+('For n_clusters =', 6, 'The silhouette_score is :', 0.41514839722346636)
+1744.87600017
+
+
+512611
+[u'DIST', u'GN/LS', u'PLAY #']
+DIST      float64
+GN/LS       int64
+PLAY #    float64
+dtype: object
+('For n_clusters =', 3, 'The silhouette_score is :', 0.36004155397817789)
+1795.87900019
+('For n_clusters =', 5, 'The silhouette_score is :', 0.42514371361396935)
+1690.4749999
+('For n_clusters =', 6, 'The silhouette_score is :', 0.4033885791766561)
+1522.26399994
+('For n_clusters =', 10, 'The silhouette_score is :', 0.29285059642053923)
+1659.30600023
