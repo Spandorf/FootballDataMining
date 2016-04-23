@@ -1,0 +1,8 @@
+Things to note:
+-Filepaths are not relative(I am lazy) so you will need to change them
+-I have not uploaded the actual data to github because I am not sure it is ok given the data belongs to Hudl
+-I wouldnt advise calling clusterGoodness() because of the runtime.  I have been running it overnight due to this.  
+
+Starting Instructions:
+-Run the function loadFiles() first to combine the separate CSVs then call exportToCSV() on that dataframe 	to output the combined file
+	-After doing this, the function loadFile() will load the combined csv from the specified filepath

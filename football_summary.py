@@ -12,6 +12,7 @@ from sklearn.preprocessing import scale
 from sklearn.metrics import silhouette_samples, silhouette_score
 import time
 
+#Loads the files provided by hudl into a dataframe
 def loadFiles():
     #loadfiles
     path = 'C:\Users\Steves\PycharmProjects\csce474groupproject\data\*.txt'
@@ -28,23 +29,24 @@ def loadFiles():
     rows = pd.concat(plays_list)
     return rows
 
-
+#Will load the combined csv into a dataframe
 def loadFile(filename):
     return pd.read_csv(filename)
 
-
+#Outputs basic summary stats, will give mean/quartile for all numeric columns
 def getSummary(rows):
     #summary
     print len(rows.index)
     print list(rows)
     print rows.describe()
 
-
+#exports the dataframe to a csv, motion has to be dropped because it has unicode characters that are a bitch to handle
 def exportToCSV(rows):
     #export to csv
     rows = rows.drop('MOTION', 1)
     rows.to_csv("plays.csv")
 
+#Will split the data into runs and passes, then drops the PLAY TYPE column
 def filterPlayType(plays):
     runs = pd.DataFrame()
     passes = pd.DataFrame()
@@ -54,10 +56,12 @@ def filterPlayType(plays):
     passes = passes.drop('PLAY TYPE', 1)
     return runs, passes
 
+#takes a columnname and will filter out rows with empty values for that column
 def filterEmpty(plays, columnname):
     plays = plays[plays[columnname].notnull()]
     return plays
 
+#filters the nominal and numeric columns, numeric columns are filtered based on percentile to eliminate obvious outliers
 def filterColumns(plays):
     print "DN"
     print len(plays)
@@ -75,6 +79,7 @@ def filterColumns(plays):
     print len(plays)
     return plays
 
+#drops columns from the dataframe for the purpose of clustering, I manually comment out based on which columns I want
 def dropColumns(plays):
     plays = plays.drop('MOTION', 1)
     plays = plays.drop('DIST', 1)
@@ -88,7 +93,7 @@ def dropColumns(plays):
     plays = plays.drop('PLAY #', 1)
     return plays
 
-
+#Performs k-means clustering on the dataset, will return a dataframe with associated clusters
 def clusterPlays(plays, k):
         data = scale(plays)
         kmeans = KMeans(init='k-means++', n_clusters=k, n_init=10)
@@ -97,7 +102,7 @@ def clusterPlays(plays, k):
         clusteredPlays.insert(0, 'Cluster', kmeans.labels_)
         return plays
 
-
+#Uses silhouette score to determine the goodness of the clusters, k is an array of the desired k values
 def clusterGoodness(plays, k):
         data = scale(plays)
         rows = []
@@ -113,9 +118,11 @@ def clusterGoodness(plays, k):
             row = {'Features' : cols, 'K' : i, 'Silhouette_Avg' : silhouette_avg, 'Time' : runtime, 'Size' : len(plays)};
             rows.append(row)
         output = pd.DataFrame(rows)
+        #Will output a csv with the results and date ran
         filename = 'cluster_goodness_' + time.strftime("%Y-%m-%d_%H-%M-%S") +'.csv'
         output.to_csv(filename)
 
+#Shows the amount of rows that do not contain a value for the specified columns
 def variableFilteringAnalysis(plays, columns):
     rows = []
     for column in columns:
