@@ -1,0 +1,21 @@
+DN
+999978
+plays = plays[plays["DN"].isin([1,2,3,4])]
+Down number must be 1,2,3,4.  Anything else is a mistake.  
+961432
+
+Play #
+961432
+plays = plays[plays["PLAY #"] > 0]
+Play number cannot be negative
+plays = plays[plays["PLAY #"] < 200]
+Cutting off the 95.5 percentile, Avg number of plays in HS is 60, Avg number of plays in college is 120.  
+950943
+
+DIST
+950943
+plays = plays[plays["DIST"] > 0]
+Distance to first down has to be a positive number
+plays = plays[plays["DIST"] <= 35]
+Cutting off 99th percentile, something like 2000 rows.  
+948085

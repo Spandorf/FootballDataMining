@@ -12,7 +12,7 @@ from sklearn.preprocessing import scale
 from sklearn.metrics import silhouette_samples, silhouette_score
 import time
 
-def loadFile():
+def loadFiles():
     #loadfiles
     path = 'C:\Users\Steves\PycharmProjects\csce474groupproject\data\*.txt'
     allFiles = glob.glob(path)
@@ -27,6 +27,10 @@ def loadFile():
         f.close()
     rows = pd.concat(plays_list)
     return rows
+
+
+def loadFile(filename):
+    return pd.read_csv(filename)
 
 
 def getSummary(rows):
@@ -54,7 +58,22 @@ def filterEmpty(plays, columnname):
     plays = plays[plays[columnname].notnull()]
     return plays
 
-
+def filterColumns(plays):
+    print "DN"
+    print len(plays)
+    plays = plays[plays["DN"].isin([1,2,3,4])]
+    print len(plays)
+    print "Play #"
+    print len(plays)
+    plays = plays[plays["PLAY #"] > 0]
+    plays = plays[plays["PLAY #"] < 200]
+    print len(plays)
+    print "DIST"
+    print len(plays)
+    plays = plays[plays["DIST"] > 0]
+    plays = plays[plays["DIST"] <= 35]
+    print len(plays)
+    return plays
 
 def dropColumns(plays):
     plays = plays.drop('MOTION', 1)
@@ -96,14 +115,28 @@ def clusterGoodness(plays, k):
         output = pd.DataFrame(rows)
         filename = 'cluster_goodness_' + time.strftime("%Y-%m-%d_%H-%M-%S") +'.csv'
         output.to_csv(filename)
-        
+
+def variableFilteringAnalysis(plays, columns):
+    rows = []
+    for column in columns:
+        filteredPlays = filterEmpty(plays, column)
+        row = {'Column' : column, 'Size' : len(filteredPlays)}
+        rows.append(row)
+    output = pd.DataFrame(rows)
+    filename = 'column_analysis.csv'
+    output.to_csv(filename)
+
+
 
 def main():
     plays = pd.DataFrame()
-    plays = loadFile()
-
+    plays = loadFile('C:\Users\Steves\PycharmProjects\csce474groupproject\plays.csv')
+    columns = plays.columns.values.tolist()
+    #variableFilteringAnalysis(plays, columns)
     #getSummary(plays)
     #exportToCSV(plays)
+    plays = filterColumns(plays)
+    print len(plays)
     plays = filterEmpty(plays, 'DIST')
     plays = filterEmpty(plays, 'DN')
     plays = filterEmpty(plays, 'PLAY #')
