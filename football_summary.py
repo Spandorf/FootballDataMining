@@ -12,6 +12,7 @@ from sklearn.preprocessing import scale
 from sklearn.metrics import silhouette_samples, silhouette_score
 from sklearn.tree import DecisionTreeClassifier, export_graphviz
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.cross_validation import train_test_split
 import statsmodels.api as sm
 import time
 
@@ -99,7 +100,7 @@ def dropColumnsInsufficientData(plays):
 def dropColumnsClustering(plays):
     #plays = plays.drop('MOTION', 1)
     plays = plays.drop('DIST', 1)
-    plays = plays.drop('DN', 1)
+    #plays = plays.drop('DN', 1)
     plays = plays.drop('HASH', 1)
     plays = plays.drop('YARD LN', 1)
     plays = plays.drop('PLAY #', 1)
@@ -123,8 +124,8 @@ def clusterPlays(plays, k):
         clusteredPlays = pd.DataFrame(plays, columns=columns)
         clusteredPlays.insert(0, 'CLUSTER', kmeans.labels_)
         filename = 'k' + str(k) + '_clusteredPlays_runs_'+ time.strftime("%Y-%m-%d_%H-%M-%S") + '.csv'
-        clusteredPlays.to_csv(filename)
-        clusterAnalysis(clusteredPlays, k)
+        #clusteredPlays.to_csv(filename)
+        #clusterAnalysis(clusteredPlays, k)
         return clusteredPlays
 
 #Uses silhouette score to determine the goodness of the clusters, k is an array of the desired k values
@@ -173,8 +174,33 @@ def linReg(plays):
 
 
 def randomForest(plays):
-    x = plays['DN', 'DIST', 'PLAY #','YARD LN']
+    x = plays[['GN/LS','DN', 'DIST', 'PLAY #','YARD LN']]
+    y = plays['CLUSTER']
+    Xtrain, Xtest, ytrain, ytest = train_test_split(x, y, random_state=0)
+    clf = DecisionTreeClassifier(max_depth=11)
+    clf.fit(Xtrain, ytrain)
+    ypred = clf.predict(Xtest)
+    print metrics.accuracy_score(ypred, ytest)
+    print metrics.confusion_matrix(ypred, ytest)
 
+
+def randomForestClassifier(plays):
+    x = plays[['GN/LS','DN', 'DIST', 'PLAY #','YARD LN']]
+    y = plays['CLUSTER']
+    Xtrain, Xtest, ytrain, ytest = train_test_split(x, y, random_state=0)
+    rf = RandomForestClassifier(n_estimators=100, n_jobs=2, max_depth=5)
+    rf.fit(Xtrain, ytrain)
+    ypred = rf.predict(Xtest)
+    print metrics.accuracy_score(ypred, ytest)
+    print metrics.confusion_matrix(ypred, ytest)
+    importances = rf.feature_importances_
+    std = np.std([tree.feature_importances_ for tree in rf.estimators_],axis=0)
+    indices = np.argsort(importances)[::-1]
+    # Print the feature ranking
+    print("Feature ranking:")
+    print
+    for f in range(x.shape[1]):
+        print("%d. feature %d (%f)" % (f + 1, indices[f], importances[indices[f]]))
 
 
 def main():
@@ -199,8 +225,9 @@ def main():
     print list(runs.columns.values)
 
     #linReg(runs)
-    #clusteredRuns = clusterPlays(runs, 8)
-
+    clusteredRuns = clusterPlays(runs, 8)
+    #randomForest(clusteredRuns)
+    randomForestClassifier(clusteredRuns)
     #print len(clusteredRuns)
     #clusterGoodness(runs, [5])
 
