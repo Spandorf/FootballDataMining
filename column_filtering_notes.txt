@@ -19,3 +19,9 @@ Distance to first down has to be a positive number
 plays = plays[plays["DIST"] <= 35]
 Cutting off 99th percentile, something like 2000 rows.  
 948085
+
+GN/LS
+948085
+plays = plays[plays["GN/LS"] >= -30]
+There are about 500 rows with losses over -30.  This is extremely unlikely to happen in football.  
+947719

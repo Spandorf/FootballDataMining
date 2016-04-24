@@ -10,6 +10,9 @@ from sklearn.datasets import load_digits
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import scale
 from sklearn.metrics import silhouette_samples, silhouette_score
+from sklearn.tree import DecisionTreeClassifier, export_graphviz
+from sklearn.ensemble import RandomForestClassifier
+import statsmodels.api as sm
 import time
 
 #Loads the files provided by hudl into a dataframe
@@ -36,7 +39,7 @@ def loadFile(filename):
 #Outputs basic summary stats, will give mean/quartile for all numeric columns
 def getSummary(rows):
     #summary
-    print len(rows.index)
+    print "Size:" + str(len(rows.index))
     print list(rows)
     print rows.describe()
 
@@ -77,34 +80,59 @@ def filterColumns(plays):
     plays = plays[plays["DIST"] > 0]
     plays = plays[plays["DIST"] <= 35]
     print len(plays)
+    print "GN/LS"
+    print len(plays)
+    plays = plays[plays["GN/LS"] >= -30]
+    print len(plays)
     return plays
 
 #drops columns from the dataframe for the purpose of clustering, I manually comment out based on which columns I want
-def dropColumns(plays):
-    plays = plays.drop('MOTION', 1)
-    plays = plays.drop('DIST', 1)
-    #plays = plays.drop('DN', 1)
+def dropColumnsInsufficientData(plays):
     plays = plays.drop('GAP', 1)
-    plays = plays.drop('HASH', 1)
     plays = plays.drop('PLAY DIR', 1)
     plays = plays.drop('QTR', 1)
     plays = plays.drop('RESULT', 1)
+    plays = plays.drop('Unnamed: 0', 1)
+    return plays
+
+#drops columns from the dataframe for the purpose of clustering, I manually comment out based on which columns I want
+def dropColumnsClustering(plays):
+    #plays = plays.drop('MOTION', 1)
+    plays = plays.drop('DIST', 1)
+    plays = plays.drop('DN', 1)
+    plays = plays.drop('HASH', 1)
     plays = plays.drop('YARD LN', 1)
     plays = plays.drop('PLAY #', 1)
     return plays
 
+def clusterAnalysis(plays, k):
+    print 'Total size: ' + str(len(plays))
+    for i in range(0, k):
+        filteredPlays = plays[plays["CLUSTER"] == i]
+        print "Cluster-" + str(i)
+        print getSummary(filteredPlays)
+
+
 #Performs k-means clustering on the dataset, will return a dataframe with associated clusters
 def clusterPlays(plays, k):
-        data = scale(plays)
+        filteredPlays = dropColumnsClustering(plays)
+        columns = plays.columns.values.tolist()
+        data = scale(filteredPlays)
         kmeans = KMeans(init='k-means++', n_clusters=k, n_init=10)
         kmeans.fit(data)
-        clusteredPlays = pd.DataFrame(plays, columns=['DN','GN/LS'])
-        clusteredPlays.insert(0, 'Cluster', kmeans.labels_)
-        return plays
+        clusteredPlays = pd.DataFrame(plays, columns=columns)
+        clusteredPlays.insert(0, 'CLUSTER', kmeans.labels_)
+        filename = 'k' + str(k) + '_clusteredPlays_runs_'+ time.strftime("%Y-%m-%d_%H-%M-%S") + '.csv'
+        clusteredPlays.to_csv(filename)
+        clusterAnalysis(clusteredPlays, k)
+        return clusteredPlays
 
 #Uses silhouette score to determine the goodness of the clusters, k is an array of the desired k values
 def clusterGoodness(plays, k):
-        data = scale(plays)
+        plays = dropColumnsClustering(plays)
+        #print  plays.columns.values
+        #data = scale(plays)
+        data = plays.values
         rows = []
         colList = plays.columns.values.tolist()
         cols = str(', '.join(colList))
@@ -115,7 +143,7 @@ def clusterGoodness(plays, k):
             silhouette_avg = silhouette_score(data, cluster_labels, sample_size=50000)
             end = time.time()
             runtime = (end - start)
-            row = {'Features' : cols, 'K' : i, 'Silhouette_Avg' : silhouette_avg, 'Time' : runtime, 'Size' : len(plays)};
+            row = {'Features' : cols, 'K' : i, 'Silhouette_Avg' : silhouette_avg, 'Time' : runtime, 'Size' : len(data)};
             rows.append(row)
         output = pd.DataFrame(rows)
         #Will output a csv with the results and date ran
@@ -135,15 +163,30 @@ def variableFilteringAnalysis(plays, columns):
 
 
 
+def linReg(plays):
+    data = scale(plays)
+    x = plays[['DN', 'DIST', 'PLAY #','YARD LN']]
+    y = plays['GN/LS']
+    x = sm.add_constant(x)
+    est = sm.OLS(y, x).fit()
+    print est.summary()
+
+
+def randomForest(plays):
+    x = plays['DN', 'DIST', 'PLAY #','YARD LN']
+
+
+
 def main():
     plays = pd.DataFrame()
+    #plays = loadFiles()
     plays = loadFile('C:\Users\Steves\PycharmProjects\csce474groupproject\plays.csv')
     columns = plays.columns.values.tolist()
     #variableFilteringAnalysis(plays, columns)
     #getSummary(plays)
     #exportToCSV(plays)
+    print list(plays.columns.values)
     plays = filterColumns(plays)
-    print len(plays)
     plays = filterEmpty(plays, 'DIST')
     plays = filterEmpty(plays, 'DN')
     plays = filterEmpty(plays, 'PLAY #')
@@ -151,17 +194,15 @@ def main():
     plays = filterEmpty(plays, 'YARD LN')
     #has_quarter = filterEmpty(has_quarter, 'YARD LN')
     #has_quarter_runs, has_quarter_passes = filterPlayType(has_quarter)
-    plays = dropColumns(plays)
-    
+    plays = dropColumnsInsufficientData(plays)
     runs, passes = filterPlayType(plays)
-    print len(runs)
-    temp = list(runs.columns.values)
-    print temp
-    print runs.dtypes
+    print list(runs.columns.values)
 
-    temp = clusterPlays(runs, 5)
-    #clusterGoodness(data, [5])
-    
+    #linReg(runs)
+    #clusteredRuns = clusterPlays(runs, 8)
+
+    #print len(clusteredRuns)
+    #clusterGoodness(runs, [5])
 
 if __name__ == '__main__':
     main()
