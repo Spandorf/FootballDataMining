@@ -1,0 +1,137 @@
+Max_Depth: 5
+Baseline Accuracy: 0.706953494308
+Accuracy score: 0.976955529669
+[[160329   3756]
+ [  1526  63598]]
+Feature ranking:
+1. feature GN/LS (0.803627)
+2. feature DN (0.158938)
+3. feature DIST (0.027134)
+4. feature PLAY # (0.004963)
+5. feature YARD LN (0.004793)
+6. feature Is_Run (0.000545)
+
+Max_Depth: 5
+Baseline Accuracy: 0.706953494308
+Accuracy score: 0.740782430009
+[[152874  50434]
+ [  8981  16920]]
+Feature ranking:
+1. feature DN (0.807864)
+2. feature DIST (0.110578)
+3. feature PLAY # (0.047850)
+4. feature YARD LN (0.025299)
+5. feature Is_Run (0.008409)
+
+Max_Depth: 6
+Baseline Accuracy: 0.706953494308
+Accuracy score: 0.744268331523
+[[152697  49458]
+ [  9158  17896]]
+Feature ranking:
+1. feature DN (0.793383)
+2. feature DIST (0.109415)
+3. feature PLAY # (0.047876)
+4. feature YARD LN (0.033253)
+5. feature Is_Run (0.016074)
+
+Max_Depth: 6
+Baseline Accuracy: 0.706959279385
+Accuracy score: 0.743303980521
+[[152664  49812]
+ [  9014  17676]]
+Feature ranking:
+1. feature DN (0.789462)
+2. feature DIST (0.105951)
+3. feature PLAY # (0.048684)
+4. feature ScaledYardLine (0.042889)
+5. feature Is_Run (0.013015)
+
+Max_Depth: 10
+Baseline Accuracy: 0.706953494308
+Accuracy score: 0.748818763661
+[[153142  48860]
+ [  8713  18494]]
+Feature ranking:
+1. feature DN (0.663377)
+2. feature DIST (0.100054)
+3. feature PLAY # (0.096952)
+4. feature YARD LN (0.095802)
+5. feature Is_Run (0.043814)
+
+Max_Depth: 10
+Baseline Accuracy: 0.706959279385
+Accuracy score: 0.750106909402
+[[153362  48951]
+ [  8316  18537]]
+Feature ranking:
+1. feature DN (0.655904)
+2. feature DIST (0.110350)
+3. feature PLAY # (0.102982)
+4. feature ScaledYardLine (0.083848)
+5. feature Is_Run (0.046915)
+
+Max_Depth: 5
+Baseline Accuracy: 0.697969035064
+Accuracy score: 0.743482652253
+[[71593 23139]
+ [ 5052 10115]]
+Feature ranking:
+1. feature DN (0.727737)
+2. feature DIST (0.139762)
+3. feature PLAY # (0.051515)
+4. feature YARD LN (0.048212)
+5. feature Is_Run (0.024645)
+6. feature QTR (0.008129)
+
+Max_Depth: 6
+Baseline Accuracy: 0.697969035064
+Accuracy score: 0.747823001119
+[[72474 23543]
+ [ 4171  9711]]
+Feature ranking:
+1. feature DN (0.703226)
+2. feature DIST (0.128492)
+3. feature PLAY # (0.059638)
+4. feature YARD LN (0.051377)
+5. feature Is_Run (0.044676)
+6. feature QTR (0.012592)
+
+Max_Depth: 6
+Baseline Accuracy: 0.697913910004
+Accuracy score: 0.744440287271
+[[72178 23768]
+ [ 4237  9400]]
+Feature ranking:
+1. feature DN (0.729162)
+2. feature DIST (0.099428)
+3. feature PLAY # (0.073660)
+4. feature ScaledYardLine (0.047140)
+5. feature Is_Run (0.039737)
+6. feature QTR (0.010872)
+
+Max_Depth: 10
+Baseline Accuracy: 0.697969035064
+Accuracy score: 0.760407283051
+[[73080 22766]
+ [ 3565 10488]]
+Feature ranking:
+1. feature DN (0.569493)
+2. feature DIST (0.135473)
+3. feature PLAY # (0.133309)
+4. feature YARD LN (0.089026)
+5. feature Is_Run (0.042306)
+6. feature QTR (0.030394)
+
+Max_Depth: 10
+Baseline Accuracy: 0.697967793243
+Accuracy score: 0.760360065169
+[[73078 22743]
+ [ 3586 10462]]
+Feature ranking:
+1. feature DN (0.556496)
+2. feature DIST (0.146393)
+3. feature PLAY # (0.135814)
+4. feature ScaledYardLine (0.086163)
+5. feature Is_Run (0.044926)
+6. feature QTR (0.030208)
