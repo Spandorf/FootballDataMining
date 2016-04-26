@@ -303,6 +303,23 @@ def runpass_firstDownPercentages(plays):
             print 'Pass, Size: ' + str(len(passes)) + ', Qtr: ' + str(j) + ', DN: ' + str(i) + ', FD%: ' + str(pass_perc)
 
 
+def runpass_firstDownPercentages(plays):
+    for j in [1,2,3,4]:
+        qtr = plays[plays["QTR"] == j]
+        for i in [1,2,3,4]:
+            dn = qtr[qtr["DN"] == i]
+            runs, passes = filterPlayType(qtr)
+            runs_dist_short = runs[runs["DIST"] >= 5 ]
+            runs_dist_long = runs[runs["DIST"] < 5 ]
+            pass_dist_short = passes[passes["DIST"] >= 5 ]
+            pass_dist_long = passes[passes["DIST"] < 5 ]
+            print 'Run_Short, Size: ' + str(len(runs_dist_short)) + ', Qtr: ' + str(j) + ', DN: ' + str(i) + ', FD%: ' + str(calcFirstDownPercentage(runs_dist_short))
+            print 'Run_Long, Size: ' + str(len(runs_dist_long)) + ', Qtr: ' + str(j) + ', DN: ' + str(i) + ', FD%: ' + str(calcFirstDownPercentage(runs_dist_long))
+            print 'Pass_Short, Size: ' + str(len(pass_dist_short)) + ', Qtr: ' + str(j) + ', DN: ' + str(i) + ', FD%: ' + str(calcFirstDownPercentage(pass_dist_short))
+            print 'Pass_Long, Size: ' + str(len(pass_dist_long)) + ', Qtr: ' + str(j) + ', DN: ' + str(i) + ', FD%: ' + str(calcFirstDownPercentage(pass_dist_long))
+
+
+
 
 def main():
     plays = pd.DataFrame()
