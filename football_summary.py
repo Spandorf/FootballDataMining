@@ -296,19 +296,19 @@ def runpass_firstDownPercentages(plays):
         qtr = plays[plays["QTR"] == j]
         for i in [1,2,3,4]:
             dn = qtr[qtr["DN"] == i]
-            runs, passes = filterPlayType(qtr)
+            runs, passes = filterPlayType(dn)
             run_perc = calcFirstDownPercentage(runs)
             pass_perc = calcFirstDownPercentage(passes)
             print 'Run, Size: ' + str(len(runs)) + ', Qtr: ' + str(j) + ', DN: ' + str(i) + ', FD%: ' + str(run_perc)
             print 'Pass, Size: ' + str(len(passes)) + ', Qtr: ' + str(j) + ', DN: ' + str(i) + ', FD%: ' + str(pass_perc)
 
 
-def runpass_firstDownPercentages(plays):
+def runpass_firstDownPercentages2(plays):
     for j in [1,2,3,4]:
         qtr = plays[plays["QTR"] == j]
         for i in [1,2,3,4]:
             dn = qtr[qtr["DN"] == i]
-            runs, passes = filterPlayType(qtr)
+            runs, passes = filterPlayType(dn)
             runs_dist_short = runs[runs["DIST"] >= 5 ]
             runs_dist_long = runs[runs["DIST"] < 5 ]
             pass_dist_short = passes[passes["DIST"] >= 5 ]
