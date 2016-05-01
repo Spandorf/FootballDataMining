@@ -1,0 +1,213 @@
+
+Support Threshold: .3
+4
+Supp Conf  Rule
+conf	supp	rule
+0.929	0.418	Down-1=1 -> Med-Dist=1
+0.588	0.418	Med-Dist=1 -> Down-1=1
+0.710	0.396	Run=1 -> Med-Dist=1
+0.556	0.396	Med-Dist=1 -> Run=1
+
+Support Threshold: .2
+18
+Supp Conf  Rule
+conf	supp	rule
+0.929	0.418	Down-1=1 -> Med-Dist=1
+0.588	0.418	Med-Dist=1 -> Down-1=1
+0.710	0.396	Run=1 -> Med-Dist=1
+0.556	0.396	Med-Dist=1 -> Run=1
+0.619	0.279	Down-1=1 -> Run=1
+0.501	0.279	Run=1 -> Down-1=1
+0.926	0.258	Down-1=1 Run=1 -> Med-Dist=1
+0.653	0.258	Run=1 Med-Dist=1 -> Down-1=1
+0.618	0.258	Down-1=1 Med-Dist=1 -> Run=1
+0.574	0.258	Down-1=1 -> Run=1 Med-Dist=1
+0.464	0.258	Run=1 -> Down-1=1 Med-Dist=1
+0.363	0.258	Med-Dist=1 -> Down-1=1 Run=1
+0.727	0.238	Qtr-1=1 -> Med-Dist=1
+0.334	0.238	Med-Dist=1 -> Qtr-1=1
+0.982	0.236	Rush=1 -> Run=1
+0.424	0.236	Run=1 -> Rush=1
+0.940	0.204	Large-Gain=1 -> First_Down=1
+0.676	0.204	First_Down=1 -> Large-Gain=1
+
+Support Threshold: .1
+176
+Supp Conf  Rule
+conf	supp	rule
+0.929	0.418	Down-1=1 -> Med-Dist=1
+0.588	0.418	Med-Dist=1 -> Down-1=1
+0.710	0.396	Run=1 -> Med-Dist=1
+0.556	0.396	Med-Dist=1 -> Run=1
+0.619	0.279	Down-1=1 -> Run=1
+0.501	0.279	Run=1 -> Down-1=1
+0.926	0.258	Down-1=1 Run=1 -> Med-Dist=1
+0.653	0.258	Run=1 Med-Dist=1 -> Down-1=1
+0.618	0.258	Down-1=1 Med-Dist=1 -> Run=1
+0.574	0.258	Down-1=1 -> Run=1 Med-Dist=1
+0.464	0.258	Run=1 -> Down-1=1 Med-Dist=1
+0.363	0.258	Med-Dist=1 -> Down-1=1 Run=1
+0.727	0.238	Qtr-1=1 -> Med-Dist=1
+0.334	0.238	Med-Dist=1 -> Qtr-1=1
+0.982	0.236	Rush=1 -> Run=1
+0.424	0.236	Run=1 -> Rush=1
+0.940	0.204	Large-Gain=1 -> First_Down=1
+0.676	0.204	First_Down=1 -> Large-Gain=1
+0.609	0.197	Down-2=1 -> Med-Dist=1
+0.276	0.197	Med-Dist=1 -> Down-2=1
+0.823	0.196	Small-Gain=1 -> Run=1
+0.353	0.196	Run=1 -> Small-Gain=1
+0.711	0.186	Qtr-2=1 -> Med-Dist=1
+0.262	0.186	Med-Dist=1 -> Qtr-2=1
+0.608	0.184	First_Down=1 -> Med-Dist=1
+0.258	0.184	Med-Dist=1 -> First_Down=1
+0.566	0.183	Down-2=1 -> Run=1
+0.328	0.183	Run=1 -> Down-2=1
+0.545	0.178	Qtr-1=1 -> Run=1
+0.320	0.178	Run=1 -> Qtr-1=1
+0.740	0.178	Rush=1 -> Med-Dist=1
+0.250	0.178	Med-Dist=1 -> Rush=1
+0.586	0.177	First_Down=1 -> Run=1
+0.318	0.177	Run=1 -> First_Down=1
+0.982	0.175	Rush=1 Med-Dist=1 -> Run=1
+0.740	0.175	Rush=1 Run=1 -> Med-Dist=1
+0.727	0.175	Rush=1 -> Run=1 Med-Dist=1
+0.442	0.175	Run=1 Med-Dist=1 -> Rush=1
+0.314	0.175	Run=1 -> Rush=1 Med-Dist=1
+0.246	0.175	Med-Dist=1 -> Rush=1 Run=1
+0.754	0.169	Med-Gain=1 -> Med-Dist=1
+0.238	0.169	Med-Dist=1 -> Med-Gain=1
+0.678	0.162	Small-Gain=1 -> Med-Dist=1
+0.227	0.162	Med-Dist=1 -> Small-Gain=1
+0.707	0.161	Qtr-3=1 -> Med-Dist=1
+0.226	0.161	Med-Dist=1 -> Qtr-3=1
+1.000	0.157	Large-Gain=1 Med-Dist=1 -> First_Down=1
+0.853	0.157	First_Down=1 Med-Dist=1 -> Large-Gain=1
+0.767	0.157	First_Down=1 Large-Gain=1 -> Med-Dist=1
+0.721	0.157	Large-Gain=1 -> First_Down=1 Med-Dist=1
+0.721	0.157	Large-Gain=1 -> Med-Dist=1
+0.519	0.157	First_Down=1 -> Large-Gain=1 Med-Dist=1
+0.220	0.157	Med-Dist=1 -> First_Down=1 Large-Gain=1
+0.220	0.157	Med-Dist=1 -> Large-Gain=1
+0.456	0.149	Qtr-1=1 -> Down-1=1
+0.331	0.149	Down-1=1 -> Qtr-1=1
+0.650	0.146	Med-Gain=1 -> Run=1
+0.262	0.146	Run=1 -> Med-Gain=1
+0.623	0.142	Qtr-3=1 -> Run=1
+0.254	0.142	Run=1 -> Qtr-3=1
+0.937	0.140	Down-1=1 Qtr-1=1 -> Med-Dist=1
+0.588	0.140	Qtr-1=1 Med-Dist=1 -> Down-1=1
+0.427	0.140	Qtr-1=1 -> Down-1=1 Med-Dist=1
+0.334	0.140	Down-1=1 Med-Dist=1 -> Qtr-1=1
+0.310	0.140	Down-1=1 -> Qtr-1=1 Med-Dist=1
+0.196	0.140	Med-Dist=1 -> Down-1=1 Qtr-1=1
+0.821	0.133	Small-Gain=1 Med-Dist=1 -> Run=1
+0.676	0.133	Run=1 Small-Gain=1 -> Med-Dist=1
+0.557	0.133	Small-Gain=1 -> Run=1 Med-Dist=1
+0.336	0.133	Run=1 Med-Dist=1 -> Small-Gain=1
+0.238	0.133	Run=1 -> Small-Gain=1 Med-Dist=1
+0.187	0.133	Med-Dist=1 -> Run=1 Small-Gain=1
+0.499	0.131	Qtr-2=1 -> Run=1
+0.235	0.131	Run=1 -> Qtr-2=1
+0.725	0.129	Run=1 Qtr-1=1 -> Med-Dist=1
+0.544	0.129	Qtr-1=1 Med-Dist=1 -> Run=1
+0.395	0.129	Qtr-1=1 -> Run=1 Med-Dist=1
+0.326	0.129	Run=1 Med-Dist=1 -> Qtr-1=1
+0.232	0.129	Run=1 -> Qtr-1=1 Med-Dist=1
+0.182	0.129	Med-Dist=1 -> Run=1 Qtr-1=1
+0.693	0.127	Qtr-4=1 -> Med-Dist=1
+0.178	0.127	Med-Dist=1 -> Qtr-4=1
+0.715	0.126	Direction-Left=1 -> Med-Dist=1
+0.178	0.126	Med-Dist=1 -> Direction-Left=1
+0.515	0.124	Rush=1 -> Down-1=1
+0.275	0.124	Down-1=1 -> Rush=1
+0.983	0.122	Down-1=1 Rush=1 -> Run=1
+0.516	0.122	Rush=1 Run=1 -> Down-1=1
+0.507	0.122	Rush=1 -> Down-1=1 Run=1
+0.437	0.122	Down-1=1 Run=1 -> Rush=1
+0.271	0.122	Down-1=1 -> Rush=1 Run=1
+0.219	0.122	Run=1 -> Down-1=1 Rush=1
+0.680	0.120	Direction-Left=1 -> Run=1
+0.216	0.120	Run=1 -> Direction-Left=1
+0.447	0.117	Qtr-2=1 -> Down-1=1
+0.260	0.117	Down-1=1 -> Qtr-2=1
+0.943	0.117	Down-1=1 Rush=1 -> Med-Dist=1
+0.656	0.117	Rush=1 Med-Dist=1 -> Down-1=1
+0.486	0.117	Rush=1 -> Down-1=1 Med-Dist=1
+0.279	0.117	Down-1=1 Med-Dist=1 -> Rush=1
+0.260	0.117	Down-1=1 -> Rush=1 Med-Dist=1
+0.164	0.117	Med-Dist=1 -> Down-1=1 Rush=1
+0.486	0.116	Small-Gain=1 -> Down-1=1
+0.257	0.116	Down-1=1 -> Small-Gain=1
+0.984	0.115	Down-1=1 Rush=1 Med-Dist=1 -> Run=1
+0.943	0.115	Down-1=1 Rush=1 Run=1 -> Med-Dist=1
+0.927	0.115	Down-1=1 Rush=1 -> Run=1 Med-Dist=1
+0.657	0.115	Rush=1 Run=1 Med-Dist=1 -> Down-1=1
+0.646	0.115	Rush=1 Med-Dist=1 -> Down-1=1 Run=1
+0.487	0.115	Rush=1 Run=1 -> Down-1=1 Med-Dist=1
+0.478	0.115	Rush=1 -> Down-1=1 Run=1 Med-Dist=1
+0.445	0.115	Down-1=1 Run=1 Med-Dist=1 -> Rush=1
+0.412	0.115	Down-1=1 Run=1 -> Rush=1 Med-Dist=1
+0.290	0.115	Run=1 Med-Dist=1 -> Down-1=1 Rush=1
+0.275	0.115	Down-1=1 Med-Dist=1 -> Rush=1 Run=1
+0.255	0.115	Down-1=1 -> Rush=1 Run=1 Med-Dist=1
+0.206	0.115	Run=1 -> Down-1=1 Rush=1 Med-Dist=1
+0.162	0.115	Med-Dist=1 -> Down-1=1 Rush=1 Run=1
+0.694	0.113	Small-Dist=1 -> Run=1
+0.203	0.113	Run=1 -> Small-Dist=1
+0.763	0.111	Run=1 Med-Gain=1 -> Med-Dist=1
+0.658	0.111	Med-Gain=1 Med-Dist=1 -> Run=1
+0.496	0.111	Med-Gain=1 -> Run=1 Med-Dist=1
+0.281	0.111	Run=1 Med-Dist=1 -> Med-Gain=1
+0.200	0.111	Run=1 -> Med-Gain=1 Med-Dist=1
+0.157	0.111	Med-Dist=1 -> Run=1 Med-Gain=1
+0.607	0.111	Down-2=1 Run=1 -> Med-Dist=1
+0.563	0.111	Down-2=1 Med-Dist=1 -> Run=1
+0.343	0.111	Down-2=1 -> Run=1 Med-Dist=1
+0.280	0.111	Run=1 Med-Dist=1 -> Down-2=1
+0.199	0.111	Run=1 -> Down-2=1 Med-Dist=1
+0.156	0.111	Med-Dist=1 -> Down-2=1 Run=1
+0.503	0.109	Large-Gain=1 -> Run=1
+0.196	0.109	Run=1 -> Large-Gain=1
+0.919	0.108	Down-1=1 Qtr-2=1 -> Med-Dist=1
+0.579	0.108	Qtr-2=1 Med-Dist=1 -> Down-1=1
+0.411	0.108	Qtr-2=1 -> Down-1=1 Med-Dist=1
+0.258	0.108	Down-1=1 Med-Dist=1 -> Qtr-2=1
+0.239	0.108	Down-1=1 -> Qtr-2=1 Med-Dist=1
+0.152	0.108	Med-Dist=1 -> Down-1=1 Qtr-2=1
+0.330	0.107	Down-2=1 -> Qtr-1=1
+0.326	0.107	Qtr-1=1 -> Down-2=1
+0.581	0.106	Qtr-4=1 -> Run=1
+0.191	0.106	Run=1 -> Qtr-4=1
+0.474	0.106	Med-Gain=1 -> Down-1=1
+0.236	0.106	Down-1=1 -> Med-Gain=1
+0.462	0.105	Qtr-3=1 -> Down-1=1
+0.234	0.105	Down-1=1 -> Qtr-3=1
+0.898	0.104	Down-1=1 Small-Gain=1 -> Med-Dist=1
+0.643	0.104	Small-Gain=1 Med-Dist=1 -> Down-1=1
+0.436	0.104	Small-Gain=1 -> Down-1=1 Med-Dist=1
+0.249	0.104	Down-1=1 Med-Dist=1 -> Small-Gain=1
+0.231	0.104	Down-1=1 -> Small-Gain=1 Med-Dist=1
+0.146	0.104	Med-Dist=1 -> Down-1=1 Small-Gain=1
+0.344	0.104	First_Down=1 -> Down-2=1
+0.322	0.104	Down-2=1 -> First_Down=1
+0.946	0.103	Run=1 Large-Gain=1 -> First_Down=1
+0.584	0.103	First_Down=1 Run=1 -> Large-Gain=1
+0.506	0.103	First_Down=1 Large-Gain=1 -> Run=1
+0.475	0.103	Large-Gain=1 -> First_Down=1 Run=1
+0.342	0.103	First_Down=1 -> Run=1 Large-Gain=1
+0.185	0.103	Run=1 -> First_Down=1 Large-Gain=1
+0.961	0.102	Down-1=1 Med-Gain=1 -> Med-Dist=1
+0.604	0.102	Med-Gain=1 Med-Dist=1 -> Down-1=1
+0.455	0.102	Med-Gain=1 -> Down-1=1 Med-Dist=1
+0.244	0.102	Down-1=1 Med-Dist=1 -> Med-Gain=1
+0.227	0.102	Down-1=1 -> Med-Gain=1 Med-Dist=1
+0.144	0.102	Med-Dist=1 -> Down-1=1 Med-Gain=1
+0.337	0.102	First_Down=1 -> Down-1=1
+0.226	0.102	Down-1=1 -> First_Down=1
+0.716	0.101	Run=1 Qtr-3=1 -> Med-Dist=1
+0.630	0.101	Qtr-3=1 Med-Dist=1 -> Run=1
+0.446	0.101	Qtr-3=1 -> Run=1 Med-Dist=1
+0.256	0.101	Run=1 Med-Dist=1 -> Qtr-3=1
+0.182	0.101	Run=1 -> Qtr-3=1 Med-Dist=1
+0.143	0.101	Med-Dist=1 -> Run=1 Qtr-3=1

@@ -15,6 +15,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.cross_validation import train_test_split
 import statsmodels.api as sm
 import time
+import Orange
 
 #Loads the files provided by hudl into a dataframe
 def loadFiles():
@@ -320,29 +321,109 @@ def runpass_firstDownPercentages2(plays):
 
 
 
+def associationPreProcessing(plays):
+    assoc_plays = pd.DataFrame()
+    assoc_plays['Down-1'] = (plays['DN'] == 1)
+    assoc_plays['Down-2'] = (plays['DN'] == 2)
+    assoc_plays['Down-3'] = (plays['DN'] == 3)
+    assoc_plays['Down-4'] = (plays['DN'] == 4)
+    assoc_plays['First_Down'] = (plays['GN/LS'] >= plays['DIST'])
+    for result in pd.unique(plays['RESULT'].values):
+        assoc_plays[result] = (plays['RESULT'] == result)
+    assoc_plays['Direction-Left'] = ((plays['PLAY DIR'] == 'L') | (plays['PLAY DIR'] == 'l'))
+    assoc_plays['Qtr-1'] = (plays['QTR'] == 1)
+    assoc_plays['Qtr-2'] = (plays['QTR'] == 2)
+    assoc_plays['Qtr-3'] = (plays['QTR'] == 3)
+    assoc_plays['Qtr-4'] = (plays['QTR'] == 4)
+    assoc_plays['Large-Gain'] = (plays['GN/LS'] >= 10)
+    assoc_plays['Med-Gain'] = (5 <= plays['GN/LS']) & (plays['GN/LS'] <= 10)
+    assoc_plays['Small-Gain'] = (0 < plays['GN/LS']) &  (plays['GN/LS'] < 5)
+    assoc_plays['Neg-Gain'] = (plays['GN/LS'] < 0)
+    assoc_plays['No-Gain'] = (plays['GN/LS'] == 10)
+    assoc_plays['Large-Dist'] = (plays['DIST'] > 10)
+    assoc_plays['Med-Dist'] = (5 <= plays['DIST']) & (plays['DIST'] <= 10)
+    assoc_plays['Small-Dist'] = (0 < plays['DIST']) & (plays['DIST'] < 5)
+    assoc_plays['Run'] = (plays['PLAY TYPE'] == 'Run')
+    assoc_plays.to_csv("assoc-plays.csv")
+    return assoc_plays
+
+
+def assocociationMining(plays):
+    orangetable = df2table(plays.astype(int))
+    rules = Orange.associate.AssociationRulesSparseInducer(orangetable, support=0.1)
+    print len(rules)
+    print "%4s %4s  %s" % ("Supp", "Conf", "Rule")
+    Orange.associate.sort(rules, ["support","confidence"])
+    Orange.associate.print_rules(rules, ['confidence','support'])
+    #for r in Orange.associate.sort(rules, ms=["support","confidence"]):
+     #   print "%4.1f %4.1f  %s" % (r.support, r.confidence, r)
+
+
+def series2descriptor(d, discrete=False):
+    if d.dtype is np.dtype("float"):
+        return Orange.feature.Continuous(str(d.name))
+    elif d.dtype is np.dtype("int"):
+        return Orange.feature.Continuous(str(d.name), number_of_decimals=0)
+    else:
+        t = d.unique()
+        if discrete or len(t) < len(d) / 2:
+            t.sort()
+            return Orange.feature.Discrete(str(d.name), values=list(t.astype("str")))
+        else:
+            return Orange.feature.String(str(d.name))
+
+
+def df2domain(df):
+    featurelist = [series2descriptor(df.icol(col)) for col in xrange(len(df.columns))]
+    return Orange.data.Domain(featurelist)
+
+
+def df2table(df):
+    tdomain = df2domain(df)
+    ttables = [series2table(df.icol(i), tdomain[i]) for i in xrange(len(df.columns))]
+    return Orange.data.Table(ttables)
+
+
+def series2table(series, variable):
+    if series.dtype is np.dtype("int") or series.dtype is np.dtype("float"):
+        # Use numpy
+        # Table._init__(Domain, numpy.ndarray)
+        return Orange.data.Table(Orange.data.Domain(variable), series.values[:, np.newaxis])
+    else:
+        # Build instance list
+        # Table.__init__(Domain, list_of_instances)
+        tdomain = Orange.data.Domain(variable)
+        tinsts = [Orange.data.Instance(tdomain, [i]) for i in series]
+        return Orange.data.Table(tdomain, tinsts)
+        # 5x performance
+
 
 def main():
     plays = pd.DataFrame()
     #plays = loadFiles()
     plays = loadFile('C:\Users\Steves\PycharmProjects\csce474groupproject\plays.csv')
     columns = plays.columns.values.tolist()
+
+    #print pd.unique(plays['PLAY DIR'].values)
     #variableFilteringAnalysis(plays, columns)
     #exportToCSV(plays)
     plays = filterColumns(plays, True)
-    plays = filterEmpty(plays, 'DIST')
-    plays = filterEmpty(plays, 'DN')
-    plays = filterEmpty(plays, 'PLAY #')
-    plays = filterEmpty(plays, 'QTR')
-    plays = filterEmpty(plays, 'YARD LN')
+    assoc_plays = associationPreProcessing(plays)
+    assocociationMining(assoc_plays)
+    #plays = filterEmpty(plays, 'DIST')
+    #plays = filterEmpty(plays, 'DN')
+    #plays = filterEmpty(plays, 'PLAY #')
+    #plays = filterEmpty(plays, 'QTR')
+    #plays = filterEmpty(plays, 'YARD LN')
     #has_quarter = filterEmpty(has_quarter, 'YARD LN')
     #has_quarter_runs, has_quarter_passes = filterPlayType(has_quarter)
-    plays = dropColumnsInsufficientData(plays)
+    #plays = dropColumnsInsufficientData(plays)
     #runs, passes = filterPlayType(plays)
-    plays['ScaledYardLine'] = plays['YARD LN'].apply(lambda x: scaleYardLine(x))
+    #plays['ScaledYardLine'] = plays['YARD LN'].apply(lambda x: scaleYardLine(x))
     #getSummary(plays)
-    print len(plays)
-    calcFirstDowns(plays)
-    runpass_firstDownPercentages(plays)
+    #print len(plays)
+    #calcFirstDowns(plays)
+    #runpass_firstDownPercentages(plays)
     #print list(plays.columns.values)
     #randomForestClassifier_FirstDown(plays)
 
