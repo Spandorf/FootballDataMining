@@ -1,3 +1,25 @@
+Feature Extraction:
+
+Down-1 = (DN == 1)
+Down-2 = (DN == 2)
+Down-3 = (DN == 3)
+Down-4 = (DN == 4)
+First_Down = (GN/LS >= DIST)
+Direction-Left = ((PLAY DIR == 'L') | (PLAY DIR == 'l'))
+Qtr-1 = (QTR == 1)
+Qtr-2 = (QTR == 2)
+Qtr-3 = (QTR == 3)
+Qtr-4 = (QTR == 4)
+Large-Gain = (GN/LS >= 10)
+Med-Gain = (5 <= GN/LS) & (GN/LS <= 10)
+Small-Gain = (0 < GN/LS) &  (GN/LS < 5)
+Neg-Gain = (GN/LS < 0)
+No-Gain = (GN/LS == 10)
+Large-Dist = (DIST > 10)
+Med-Dist = (5 <= DIST) & (DIST <= 10)
+Small-Dist = (0 < DIST) & (DIST < 5)
+Run = (PLAY TYPE == 'Run')
+
 
 Support Threshold: .3
 4
